@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        
+    {% endblock title %}</title>
+    <script src="https://kit.fontawesome.com/417a2259b3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    {% block cssfile %}
+        
+    {% endblock cssfile %}
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+        <div id="header-end">
+            <div id="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <i class="fa-solid fa-bell" id="notif"></i>
+            <div id="wallet">
+                <i class="fa-solid fa-coins"></i>
+                <p>800</p>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div id="sidebar-1st" class="sidebar-divs">
+            <a href="{{url_for('index')}}" class="{% if activePage=='index' %} active {% endif %}"><i class="ri-home-line icons"></i> Home</a>
+            <a href="{{url_for('about')}}" class="{% if activePage=='about' %} active {% endif %}"><i class="ri-information-line icons"></i> About</a>
+            <a href="achievements.html"><i class="ri-award-fill icons"></i> Achievements</a>
+        </div>
+        <div id="sidebar-2nd" class="sidebar-divs">
+            <a href="create.html"><span class="typcn--plus-outline icons"></span> Create Quiz</a>
+            <a href="rooms.html"><span class="healthicons--i-training-class-outline icons"></span> My Rooms</a>
+            <a href="my-quizes.html"><i class="fas fa-book icons"></i> My Quizes</a> 
+        </div>
+        <div id="siderbar-3rd" class="sidebar-divs">
+            <a href="settings.html"><i class="fas fa-cog icons"></i> Settings</a>
+        </div>
+        <div id="profile-div">
+            <div id="username"><span id="profile-img"><img src="../images/hacker-profile.jpg"></span><p id="profile-username"></p></div>
+        </div>
+    </div>
+    {% block body %}
+        
+    {% endblock body %}
+    {% block jsfile %}
+        
+    {% endblock jsfile %}
+</body>
+</html>
