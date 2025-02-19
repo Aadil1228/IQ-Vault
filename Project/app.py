@@ -31,8 +31,10 @@ def allowed_file(filename):
 def index():
     if "user_id" in session and "username" in session and User.query.get(session["user_id"]):
         quizes=Quizes.query.all()
+        userQuizes = UserQuizes.query.filter(UserQuizes.user_id != session["user_id"]).all()
+
         print(User.query.get(session["user_id"]))
-        return render_template('index.html', activePage='index', quizes=quizes, user=User.query.get(session["user_id"]))
+        return render_template('indexTry.html', activePage='index', quizes=quizes, user=User.query.get(session["user_id"]), userQuizes=userQuizes)
     else:
         return redirect(url_for('auth'))
 
