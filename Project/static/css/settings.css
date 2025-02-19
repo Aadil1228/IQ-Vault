@@ -1,0 +1,84 @@
+
+#big-box{
+    width: 954px;
+    height: 618px;
+    padding-left: 270px;
+    padding-top: 180px;
+}
+#border{
+    width: 954px;
+    height: 518px;
+    /* border: solid; */
+    border-radius: 20px;
+    border-color: #262726;
+    background-color: rgba(39,38,39,70%);
+    position: absolute;
+    right: 188px;
+}
+#setting{
+    font-size: 50px;
+    /* padding: 50px; */
+    font-weight: normal;
+    padding-top: 28px;
+    padding-left: 51px;
+    color: #fff;
+    font-family: 'jostSemiBold';
+}
+#theme, #notify, #account{
+    font-weight: normal;
+    font-size: 30px;
+    font-family: 'nats';
+    letter-spacing: 3%;
+    /* padding:30px; */
+    padding-left: 95px;
+    /* margin-top: 29px; */
+    color:#fff;
+}
+hr{
+    margin-top: 16px;
+    background-color:#787878;
+}
+.setting-containers{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 69px;
+    margin-top: 29px;
+    align-items: center;
+}
+.setting-containers .btn-back-div{
+    height: 33px;
+    width: 87px;
+    background-color: #3D3D3D;
+    box-shadow: inset 1px 1px 5px rgba(00,00,00,50%);
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+}
+.setting-containers .btn-back-div span{
+    padding-left: 8%;
+    padding-right: 8%;
+    color: #fff;
+    font-size: 16px;
+}
+
+.setting-containers .btn-back-div button{
+    height: 34px;
+    width:87px;
+    background-color:#3D3D3D;
+    border: none;
+    clip-path: polygon(0% 0%,55% 0%,50% 100%,0% 100%);
+    background-image: linear-gradient(to bottom right,#6284FF,#B961F1);
+    /* box-shadow: 1px 1px 5px rgba(00,00,00,50%); */
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 9px;
+    padding-right: 9px;
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}

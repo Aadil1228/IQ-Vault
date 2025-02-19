@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizziFY</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/addQuestion.css')}}">
+     {#<link rel="stylesheet" href="../static/css/addQuestion.css">#}
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+    </div>
+    <main>
+        <div id="big-box">
+            <form action="/create_quiz/{{quiz.id}}/questions" method="post">
+                <div id="big-box-question-side">
+                    <div id="question-side-gradient-absolute"></div>
+                    <div id="question-side-container">
+                        <div id="progress-bar-full"> <div id="progress-bar-fill"></div> </div>
+                        <input type="text" id="question" placeholder="Q.   What is the capital of India?" name="question">
+                        <div id="options-container">
+                        <input class="options" type="text" placeholder="Option 1" name="option1">
+                        <input class="options" type="text" placeholder="Option 2" name="option2">
+                        <input class="options" type="text" placeholder="Option 3" name="option3">
+                        <input class="options" type="text" placeholder="Option 4" name="option4">
+                    </div>
+                    </div>
+                </div>
+                <div id="answer-side-gradient-absolute"></div>
+                <div id="answer-side-container">
+                    <button type="button" id="submit-button" onclick="window.location.href=`{{url_for('create_quizFinished', quiz_id=quiz.id)}}`">Submit</button>
+                    <label for="answer">Correct answer:</label>
+                    <input type="text" id="answer" placeholder="A.   Delhi" name="correct">
+                    <label for="marks">Marks :</label>
+                    <input type="number" id="marks" placeholder="3" name="marks">
+                    <label for="Explanation" >Explanation (Optional) :</label>
+                    <input type="text" id="explanation" placeholder="This is the explanation" name="explanation">
+                </div>
+                <button type="submit" id="next-btn"><span id="NextOrSubmit" style="color: #000;">+ Add Question</span> <span class="weui--arrow-outlined"></span></button>
+            </form>
+        </div>
+    </main>
+    </body>
+    </html>

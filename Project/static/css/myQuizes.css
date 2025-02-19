@@ -1,0 +1,107 @@
+#main{
+    margin-top:80px;
+    margin-left:180px;
+    padding-top:30px;
+    padding-left:45px;
+    padding-right:5px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+#main h2{
+    font-size: 32px;
+    font-weight: normal;
+    font-family: 'nats';
+    color: var(--heading-color);
+    margin-bottom: 25px;
+}
+#myquizes-container-top {
+    display:flex;
+    gap:200px;
+}
+#main #myquizes-container-top #recent-quizes{
+    width: 650px;
+}
+/* .arrow-keys{
+    cursor: pointer;
+} */
+#main .card-holder{
+    display: flex;
+    flex-direction: row;
+
+    gap:37px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    padding: 5px;
+    align-items: center;
+    /* transition: all 0.4s ease; */
+    scroll-behavior: smooth;
+}
+.quiz-card{
+    width: 280px;
+    height: 180px;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.quiz-card img{
+    position: absolute;
+    height:180px;
+    width: 280px;
+    border-radius: inherit;
+}
+.quiz-card-text{
+    position: absolute;
+    z-index: -1;
+    background-color: black;
+    color: #fff;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 20px;
+    height: inherit;
+    width: inherit;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    top:180px;
+    transition: all 0.5s ease;
+}
+.quiz-card .delete{
+    position: absolute;
+    z-index: -1;
+    opacity:1;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:20px;
+    right: 20px;
+    transition: all 1s ease-out;
+}
+.quiz-card-text p{
+    color: #ffffff;
+    opacity: 2;
+    text-align: center;
+}
+.quiz-card:hover{
+    transform: scale(1.03);
+
+}
+.quiz-card:hover .quiz-card-text{
+    z-index: 1;
+    transform: translateY(-50px);
+    opacity: 0.8;
+    
+}
+.quiz-card:hover .quiz-card-text p{
+    opacity: 1;
+}
+.quiz-card:hover .delete{
+    z-index: 2;
+    /* transform: translateY(-100px);
+    opacity: 1; */
+}

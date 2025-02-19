@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizziFY</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/addQuiz.css')}}">
+     {#<link rel="stylesheet" href="../static/css/addQuiz.css">#}
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+    </div>
+    <main>
+        <div id="big-box">
+            <form id="add-quiz-form" method="POST", enctype="multipart/form-data">
+            <div id="big-box-question-side">
+                <div id="question-side-gradient-absolute"></div>
+                <div id="question-side-container">
+                    <div id="progress-bar-full"> <div id="progress-bar-fill"></div> </div>
+                    <!-- <h4 id="question-tracker"><span id="question-no">1</span>/<span id="total-questions"></span> </h4> -->
+                     <div id="enterquestion"><h1>Quiz Thumbnail</h1></div>
+                    <div id="question"><input type="file" name="thumbnail" placeholder="Enter a thumbnail" id="Qinput"></div>
+                </div>
+            </div>
+            <div id="answer-side-gradient-absolute"></div>
+            <div id="answer-side-container">
+                <!-- <div id="question-access_timer-holder">
+                    <div id="question-access">
+                        <div id="question-access-arrow-right"><span class="weui--arrow-outlined"></span></div>
+                        <div id="question-access-arrow-left"><span class="weui--arrow-outlined"></span></div>
+                        <div id="question-access-keys-container"> -->
+                            <!-- <div class="question-access-keys">1</div>
+                            <div class="question-access-keys">2</div>
+                            <div class="question-access-keys">3</div>
+                            <div class="question-access-keys">4</div>
+                            <div class="question-access-keys">5</div>
+                            <div class="question-access-keys">6</div> -->
+                        <!-- </div>
+                        
+                    </div>
+                    <div id="timer">
+                        <span class="icon-park-outline--timer"></span><span id="time" style="color: black;"></span>
+                    </div>
+                </div> -->
+                <div id="enteranswers"><h1>Enter The Details</h1></div>
+                <div id="options-container">
+                    <label for="quiz-title" class="lable-input">Quiz Title</label>
+                    <input class="options" type="text" name="title" placeholder="Quiz Title" class="optioninput">
+                    <label for="quiz-subject" class="lable-input">Quiz Subject</label>
+                    <input class="options" type="text" name="subject" placeholder="Quiz Subject" class="optioninput">
+                    <label for="quiz-difficulty" class="lable-input">Quiz Difficulty</label>
+                    <input class="options" type="text" name="difficulty" placeholder="Quiz Difficulty" class="optioninput">
+                    <label for="duration" class="lable-input">Duration</label>
+                    <input class="options" type="text" name="duration" placeholder="Duration" class="optioninput">
+                </div>
+            </div>
+            <button id="prev-btn"><span class="weui--arrow-outlined"></span> Back</button>
+            <button type="submit" id="next-btn"><span id="NextOrSubmit" style="color: #000;">Enter Questions </span> <span class="weui--arrow-outlined"></span></button>
+            </form>
+        </div>
+    </main>
+    <!-- <script>
+         let themePurple=localStorage.getItem('theme-purple')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+    </script>
+    <script>
+        const accessDiv=document.getElementById('question-access-keys-container')
+        const accessArrowRight=document.querySelector('#question-access-arrow-right')
+        const accessArrowLeft=document.querySelector('#question-access-arrow-left')
+        accessArrowRight.addEventListener('click', ()=>{
+            accessDiv.scrollLeft+=50
+        })
+        accessArrowLeft.addEventListener('click', ()=>{
+            accessDiv.scrollLeft-=50
+        })
+
+        function timer(){
+            let timeRemaining = JSON.parse(localStorage.getItem('timer')); // 2 minutes
+            const timerElement = document.getElementById('time');
+            const timer = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    const minutes = Math.floor(timeRemaining / 60);
+                    const seconds = timeRemaining % 60;
+                    timerElement.textContent = ${minutes}:${seconds < 10 ? '0' + seconds : seconds};
+                } else {
+                    clearInterval(timer);
+                    submitQuiz()
+                }
+            }, 1000);
+        }
+
+        timer() --> 
+    <!-- </script> -->
+    <!-- <script src="quizPython.js"></script> -->
+</body>
+</html>

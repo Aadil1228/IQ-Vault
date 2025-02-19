@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% block cssfile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/achievements.css') }}">
+{% endblock cssfile %}
+
+{% block body %}
+    <main id="main">
+        {% if userSubjectScores %}
+            {% for subjectScore in userSubjectScores %}
+            <div id="{{subjectScore.subject}}" class="subject right" data-score="{{subjectScore.score}}" data-maxMarks="{{subjectScore.maxMarks if (subjectScore and subjectScore.maxMarks!=0) else 1}}">
+            <h1 class="subject-name">{{subjectScore.subject}}</h1>
+            <div id="topics-div">
+                {% for topic in (subjectScore.topicsMastered).split("|") %}
+                    <div class="topics"><span id="topic-name">{{topic}}</span><span class="teenyicons--tick-circle-outline"></span></div>
+                {% endfor %}
+            </div>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number">{{(((subjectScore.score or 0) / (subjectScore.maxMarks if (subjectScore and subjectScore.maxMarks!=0) else 1)) * 100) | round(2)}}%</div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="105" cy="105" r="92" stroke-linecap="round" 
+                    />
+                </svg>
+            </div>
+        </div>
+        {% endfor %}
+            
+        {% else %}
+            <p>No Achievemts Yet</p>
+        {% endif %}
+        
+        
+        <!-- <div id="introai" class="subject left">
+            <h1 class="subject-name">Intro AI</h1>
+            <div id="topics-div">
+                <div class="topics"><span id="topic-name">Algebra</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Calculus</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Geometry</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Statistics</span><span class="teenyicons--tick-circle-outline"></span></div>
+            </div>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number"></div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                    +     <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="105" cy="105" r="92" stroke-linecap="round" />
+            </svg>
+            </div>
+        </div>
+        
+        <div id="front-end" class="subject right">
+            <h1 class="subject-name">Front-End Engineering</h1>
+            <div id="topics-div">
+                <div class="topics"><span id="topic-name">HTML Basics</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">CSS Basics</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Animations</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">JavaScript</span><span class="teenyicons--tick-circle-outline"></span></div>
+            </div>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number"></div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="105" cy="105" r="92" stroke-linecap="round" />
+            </svg>
+            </div>
+        </div> -->
+        <!-- <div id="maths" class="subject left">
+            <h1 class="subject-name">Maths</h1>
+            <div id="topics-div">
+                <div class="topics"><span id="topic-name">Algebra</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Calculus</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Geometry</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Statistics</span><span class="teenyicons--tick-circle-outline"></span></div>
+            </div>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number"></div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="105" cy="105" r="92" stroke-linecap="round" />
+            </svg>
+            </div>
+        </div>
+        <div id="python" class="subject right">
+            <h1 class="subject-name">Python</h1>
+            <div id="topics-div">
+                <div class="topics"><span id="topic-name">Loops</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Numpy</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">Pandas</span><span class="teenyicons--tick-circle-outline"></span></div>
+                <div class="topics"><span id="topic-name">File Handling</span><span class="teenyicons--tick-circle-outline"></span></div>
+            </div>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number"></div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="105" cy="105" r="92" stroke-linecap="round" />
+            </svg>
+            </div>
+        </div> -->
+    </main>
+    {% endblock body %}
+    {% block jsfile %}
+        
+    
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let themeBlue=localStorage.getItem('theme-blue')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        let anchorHoverOpacity=localStorage.getItem('anchor-hover-opacity')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--theme-blue', themeBlue);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+        document.documentElement.style.setProperty('--anchor-hover-opacity', anchorHoverOpacity);
+    </script>
+    <script>
+        entriesRight=document.querySelectorAll(".right")
+        console.log("Elements being observed:", entriesRight);
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                console.log("Intersecting:", entry.target, entry.isIntersecting);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visibleRight'); // Add animation or visible styles
+                    // observer.unobserve(entry.target); // Stop observing this element
+                }
+            });
+        }, {
+            threshold: 0.08 ,// Trigger when 10% of the element is visible
+            // root: document.querySelector('#main'),
+        });
+
+        entriesRight.forEach((el) => observer.observe(el));
+
+        entriesLeft=document.querySelectorAll(".left")
+        console.log("Elements being observed:", entriesLeft);
+        const observer2 = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                console.log("Intersecting:", entry.target, entry.isIntersecting);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visibleLeft'); // Add animation or visible styles
+                    // observer.unobserve(entry.target); // Stop observing this element
+                }
+            });
+        }, {
+            threshold: 0.08 ,// Trigger when 10% of the element is visible
+            // root: document.querySelector('#main'),
+        });
+
+        entriesLeft.forEach((el) => observer2.observe(el));
+    </script>
+    <script>
+        let number=document.querySelectorAll(".number")
+        const subjectDiv=document.querySelectorAll(".subject")
+        let subjectNames=document.querySelectorAll(".subject-name")
+        const styleSheet = document.styleSheets[0];
+        const entries=document.querySelectorAll(".subject")
+        console.log("Entries : ", entries)
+        console.log(entries[0].id, typeof(entries[0].id))
+        const observer3=new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                console.log("entry target check", entry.target)
+                if (entry.isIntersecting) {
+                    const progressCircle=entry.target.querySelector("circle")
+                    let counter=0
+                    let score = parseInt(entry.target.dataset.score) || 0;
+                    console.log("score", score)
+                    let maxMarks=parseInt(entry.target.dataset.maxmarks)
+                    if (maxMarks==0) maxMarks=1;
+                    percentage=(score/maxMarks)*100
+                    
+                    console.log("Percentage", percentage)
+                    const keyframes = ` 
+                        @keyframes anim${entry.target.id} {
+                            100% {
+                                stroke-dashoffset: ${565-(565*(percentage/100))};
+                            } } `
+                    console.log(keyframes)
+                    styleSheet.insertRule(keyframes, styleSheet.cssRules.length)
+                    progressCircle.style.animation= `anim${entry.target.id} 2s linear forwards`
+                    // console.log("Counter and Max Marks", counter, maxMarks)
+                    // const interval=setInterval(()=>{
+                    //     if (counter>=percentage){
+                    //         clearInterval(interval)
+                    //         console.log("INside Clear Interval of : ", entry.target.id)
+                    //     }
+                    //     else{
+                    //         counter+=1
+                    //         entry.target.querySelector(".number").innerHTML=counter+"%"
+                    //         console.log("Counter Render : ", counter)
+                    //     }
+                    // },(2000/percentage))
+                    observer3.unobserve(entry.target); // Stop observing this element
+            }})
+        },{
+            threshold:0.8
+        })
+        entries.forEach((el) => observer3.observe(el))
+        // for (let i=0; i<subjects.length;i++){
+        //     const progressCircle=subjectDiv[i].querySelector("circle")
+        //     let counter=0
+            // const keyframes = ` 
+            //     @keyframes anim${i} {
+            //         100% {
+            //             stroke-dashoffset: ${565-(565*(entry.id["percentage"]/100))};
+            //         } } `
+            // styleSheet.insertRule(keyframes, styleSheet.cssRules.length)
+
+        //     entries.forEach((el) => observer.observe(el));
+        //     const observer2 = new IntersectionObserver((entries, observer) => {
+        //         entries.forEach((entry) => {
+        //             console.log("Intersecting:", entry.target, entry.isIntersecting);
+        //             if (entry.isIntersecting) {
+        //                 progressCircle.style.animation= `anim${i} 2s linear forwards`
+        //                 const interval=setInterval(()=>{
+        //                     if (counter==entry.id["percentage"]){
+        //                         clearInterval(interval)
+        //                     }
+        //                     else{
+        //                         counter+=1
+        //                         number[i].innerHTML=counter+"%"
+        //                     }
+        //                 },(2000/entry.id["percentage"]))
+        //         };
+        //     })
+        //     }, {
+        //         threshold: 0.08 ,// Trigger when 10% of the element is visible
+        //         // root: document.querySelector('#main'),
+        //     });
+        // }
+
+            
+        
+        
+    </script>
+    {% endblock jsfile %}

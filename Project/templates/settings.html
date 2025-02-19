@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block cssfile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+{% endblock cssfile %}
+{% block body %}
+    <div id="big-box" class="big-box">
+        <div id="border">
+            <h1 id="setting">Settings</h1>
+            <div id="theme-btn-container" class="setting-containers">
+                <h2 id="theme">Themes</h2>
+                <div class="btn-back-div"><span>Light</span><button id="theme-btn">Light</button><span>Dark</span></div>
+            </div>
+            <hr>
+            <div class="setting-containers">
+                <h2 id="notify">Notification</h2>
+                <div class="btn-back-div"><span>On</span><button id="theme-btn">On</button><span>Off</span></div>
+            </div>
+            <hr>
+            <div class="setting-containers">
+                <h2 id="account">Account Settings</h2>
+                <span class="weui--arrow-outlined" id="arrowAccount"></span>
+            </div>
+            <hr>
+        </div>
+        
+    </div>
+{% endblock body %}
+{% block jsfile %}
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let themeBlue=localStorage.getItem('theme-blue')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        let anchorHoverOpacity=localStorage.getItem('anchor-hover-opacity')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--theme-blue', themeBlue);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+        document.documentElement.style.setProperty('--anchor-hover-opacity', anchorHoverOpacity);
+        let themeBtn = document.getElementById('theme-btn');
+        let notifyBtn = document.getElementById('notify-btn');
+        document.addEventListener('DOMContentLoaded', function(){
+            if(themePurple === '#000'){
+                themeBtn.style.clipPath='polygon(55% 0%,100% 0%,100% 100%,50% 100%)'
+                themeBtn.textContent='Dark'
+                themeBtn.style.justifyContent='flex-end'
+            }
+            else{
+                themeBtn.style.clipPath='polygon(0% 0%,55% 0%,50% 100%,0% 100%)'
+                themeBtn.textContent='Light'
+                themeBtn.style.justifyContent='flex-start'
+            }
+        })
+
+        themeBtn.addEventListener('click', function(){
+            if(themeBtn.textContent === 'Light'){
+                console.log('inside light')
+                themeBtn.style.clipPath='polygon(55% 0%,100% 0%,100% 100%,50% 100%)'
+                themeBtn.textContent='Dark'
+                themeBtn.style.justifyContent='flex-end'
+                localStorage.setItem('theme-purple', '#000')
+                localStorage.setItem('body-gradient', '70%')
+                localStorage.setItem('anchor-hover-opacity', '38%')
+                location.reload()
+                
+            }
+            else{
+                console.log('inside dark')
+                themeBtn.style.clipPath='polygon(0% 0%,55% 0%,50% 100%,0% 100%)'
+                themeBtn.textContent='Light'
+                themeBtn.style.justifyContent='flex-start'
+                localStorage.setItem('theme-purple', '#964CC5')
+                localStorage.setItem('body-gradient', '50%')
+                localStorage.setItem('anchor-hover-opacity', '0%')
+                location.reload()
+            }
+        })
+    </script>
+{% endblock jsfile %}    
+    

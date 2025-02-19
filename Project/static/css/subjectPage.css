@@ -1,0 +1,230 @@
+
+        /* Main content starts here */
+        #main{
+            margin-top:80px;
+            margin-left:180px;
+            padding-top:30px;
+            padding-left:45px;
+            padding-right:5px
+        }
+        #featured-quizes-container h2{
+            font-size: 30px;
+            font-weight: normal;
+            font-family: 'nats';
+            color: var(--heading-color);
+        }
+        #featured-quizes-container #arrow-keys-div{
+            padding-right: 25px;
+            display:flex;
+            justify-content: end;
+            gap:10px;
+        }
+        .arrow-keys{
+            cursor: pointer;
+        }
+        #main #featured-quizes-container #card-holder{
+            display: flex;
+            flex-direction: row;
+            gap:37px;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            padding: 5px;
+            align-items: center;
+            /* transition: all 0.4s ease; */
+            scroll-behavior: smooth;
+        }
+        .quiz-card{
+            width: 280px;
+            height: 180px;
+            /* background-color: #d3d3d3; */
+            border-radius: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .quiz-card img{
+            position: absolute;
+            height:180px;
+            width: 280px;
+            border-radius: inherit;
+        }
+        .quiz-card-text{
+            position: absolute;
+            z-index: -1;
+            background-color: black;
+            color: #fff;
+            opacity: 0;
+            padding: 10px;
+            border-radius: 20px;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            top:180px;
+            transition: all 0.5s ease;
+        }
+        .quiz-card-text p{
+            color: #ffffff;
+            opacity: 2;
+            text-align: center;
+        }
+        .quiz-card:hover{
+            transform: scale(1.03);
+
+        }
+        .quiz-card:hover .quiz-card-text{
+            z-index: 1;
+            transform: translateY(-50px);
+            opacity: 0.8;
+            
+        }
+        .quiz-card:hover .quiz-card-text p{
+            opacity: 1;
+        }
+        #main #subject-div{
+            position: relative;
+            width:1300px;
+            height: 300px;
+            transform: translateX(1200px);
+            align-self: flex-end;
+            background-image: linear-gradient(to right, var(--theme-purple) 40%,var(--theme-blue));
+            border-radius: 30px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 64px;
+            padding-bottom: 23px;
+            opacity: 0;
+            transition: all 0.1s ease;
+            margin-bottom: 22px;
+        }
+        .visibleRight{
+            animation: rightLoad 0.8s linear forwards;
+            /* transform: translateX(0px); */
+        }
+        @keyframes rightLoad{
+            0%{
+                transform: translateX(1300px);
+                opacity: 1;
+            }
+            100%{
+                transform: translateX(0px);
+                opacity:1
+            }
+        }
+
+        #main .subject .subject-name{
+            font-size: 65px;
+            font-weight: normal;
+            color: #fff;
+            padding-top:  5px;
+        }
+        #main .subject #topics-div{
+            display: flex;
+            gap: 20px;
+        }
+        #main .subject #topics-div .topics{
+            height: 40px;
+            border-radius: 23px;
+            background-color: rgba(36,36,36,36%);
+            padding-left: 30px;
+            padding-right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: inset 2px 1px 6.4px rgba(0,0,0,0.25);
+        }
+        #main .subject h5{
+            font-weight: normal;
+            font-size: 14px;
+            margin-top: 20px;
+            margin-right: 6px;
+            margin-left: 6px;
+        }
+        #main .subject #badge-div{
+            display: flex;
+            height: 50px;
+            width: 170px;
+            border-radius: 20px;
+            background-color: rgba(50,50,50,63%);
+        }
+        #main .right #progress-circle{
+            height: 210px;
+            width: 210px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 48px;
+            right: 103px;
+        }
+        #main .left #progress-circle{
+            height: 210px;
+            width: 210px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 48px;
+            right: 103px;
+        }
+        #outer{
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15);
+                        
+        }
+        #inner{
+            height: 170px;
+            width: 170px;
+            border-radius: 50%;
+            box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+                        /* inset -4px -4px 6px -1px rgba(255,255,255,0.7), */
+                        /* -0.5px -0.5px 0px rgba(255,255,255,1), */
+                        0.5px 0.5px 0px rgba(0,0,0,0.15),
+                        0px 12px 10px -10px rgba(0,0,0,0.05);
+            background-color: var(--theme-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .number{
+            font-weight: 550;
+            color: #fff;
+
+        }
+        circle{
+            fill: none;
+            stroke: url(#GradientColor);
+            stroke-width: 20px;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 565;
+            z-index: 5;
+            /* animation: anim 2s linear forwards ; */
+            transition: stroke-dashoffset 10s ease;
+        }
+        svg{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            /* top: 0;
+            left: 0; */
+        }
+        /* @keyframes anim{
+            100%{
+                stroke-dashoffset: 147;
+            }
+
+        } */

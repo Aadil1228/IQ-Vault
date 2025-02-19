@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizziFY</title>
+    <script src="https://kit.fontawesome.com/417a2259b3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css')}}">
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+    </div>
+    <div id="big-box">
+        <div id="result-div" class="result-div">
+            <h1 class="result">Result</h1>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number">{{ score_percentage | round(2)}}%</div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                       </linearGradient>
+                    </defs>
+                    <circle cx="60" cy="60" r="43" stroke-linecap="round" stroke-dashoffset="{{ 265 - (265 * score_percentage / 100) | int }}"/>
+                </svg>
+            </div>
+        </div>
+        <h1 id="pass-fail">{{ 'Pass' if score_percentage >= 50 else 'Fail' }}</h1>
+        <div id="badges-div">
+            <h4>Badges Earned</h4>
+            <div id="badges-container">
+                <div class="badges" id="gold" color="{{ '#FFD700' if score_percentage == 100 else 'transparent' }}"><span class="streamline--star-badge-solid"></span></div>
+                <div class="badges" id="silver" color="{{ '#C0C0C0' if score_percentage >= 90 else 'transparent' }}"><span class="streamline--star-badge-solid"></span></div>
+                <div class="badges" id="bronze" color="{{ '#A97142' if score_percentage >= 75 else 'transparent' }}"><span class="streamline--star-badge-solid"></span></div>
+            </div>
+        </div>
+        <div id="details">
+            <div id="total-questions" class="details-div"><span>Total Questions : </span><span id="totalQuestionsValue">{{ correct_count | int + wrong_count | int }}</span></div>
+            <hr>
+            <div id="correct-questions" class="details-div"><span>Correct Answers : </span><span id="correctQuestionsValue">{{ correct_count }}</span></div>
+            <hr>
+            <div id="wrong-questions" class="details-div"><span>Wrong Answers : </span><span id="wrongQuestionsValue">{{ wrong_count }}</span></div>
+            <hr>
+        </div>
+        <div id="home-btn"><a href="{{url_for('index')}}"><i class="ri-home-line icons"></i></a></div>
+    </div>
+</body>
+</html>

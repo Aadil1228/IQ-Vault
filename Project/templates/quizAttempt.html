@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizziFY</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/quizAttempt.css')}}">
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+    </div>
+    <main>
+        <div id="big-box">
+            <div id="big-box-question-side">
+                <div id="question-side-gradient-absolute"></div>
+                <div id="question-side-container">
+                    <div id="progress-bar-full"> <div id="progress-bar-fill"></div> </div>
+                    <h4 id="question-tracker"><span id="question-no">1</span>/<span id="total-questions"></span> </h4>
+                    <div id="question">What is the difference between While and Do-While Loop?</div>
+                </div>
+            </div>
+            <div id="answer-side-gradient-absolute"></div>
+            <div id="answer-side-container">
+                <div id="question-access_timer-holder">
+                    <div id="question-access">
+                        <div id="question-access-arrow-right"><span class="weui--arrow-outlined"></span></div>
+                        <div id="question-access-arrow-left"><span class="weui--arrow-outlined"></span></div>
+                        <div id="question-access-keys-container">
+                            <!-- <div class="question-access-keys">1</div>
+                            <div class="question-access-keys">2</div>
+                            <div class="question-access-keys">3</div>
+                            <div class="question-access-keys">4</div>
+                            <div class="question-access-keys">5</div>
+                            <div class="question-access-keys">6</div> -->
+                        </div>
+                        
+                    </div>
+                    <div id="timer">
+                        <span class="icon-park-outline--timer"></span><span id="time" style="color: black;"></span>
+                    </div>
+                </div>
+                <div id="options-container">
+                    <div class="options">Option 1</div>
+                    <div class="options">Option 2</div>
+                    <div class="options">Option 3</div>
+                    <div class="options">Option 4</div>
+                </div>
+            </div>
+            <button id="prev-btn"><span class="weui--arrow-outlined"></span> Previous</button>
+            <button id="next-btn"><span id="NextOrSubmit" style="color: #000;">Next</span> <span class="weui--arrow-outlined"></span></button>
+        </div>
+        {% if quiz.user_id %}
+            <form id="resultForm" style="display: none;" action="/resultUserQuizes" method="post">
+            {% else %}
+            <form id="resultForm" style="display: none;" action="/result" method="post">
+        {% endif %}
+            
+            <input type="hidden" name="score" id="scoreInput">
+            <input type="hidden" name="correctCount" id="correctCountInput">
+            <input type="hidden" name="wrongCount" id="wrongCountInput">
+            <input type="hidden" name="quizID" id="quiz_id">
+        </form>
+    </main>
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+    </script>
+    <script>
+        const accessDiv=document.getElementById('question-access-keys-container')
+        const accessArrowRight=document.querySelector('#question-access-arrow-right')
+        const accessArrowLeft=document.querySelector('#question-access-arrow-left')
+        accessArrowRight.addEventListener('click', ()=>{
+            accessDiv.scrollLeft+=50
+        })
+        accessArrowLeft.addEventListener('click', ()=>{
+            accessDiv.scrollLeft-=50
+        })
+
+        function timer(){
+            let timeRemaining = JSON.parse("{{quiz.duration}}") || 2; // 2 minutes
+            timeRemaining*=60
+            // console.log("{{quiz.duration | tojson}}")
+            // let timeRemaining = 2*60; // 2 minutes
+            const timerElement = document.getElementById('time');
+            const timer = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    const minutes = Math.floor(timeRemaining/60);
+                    const seconds = timeRemaining % 60;
+                    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                } else {
+                    clearInterval(timer);
+                    submitQuiz()
+                }
+            }, 1000);
+        }
+
+        timer()
+
+        window.questions=JSON.parse('{{questions | tojson | safe}}')
+        // Debugging: Log the raw quiz data
+    console.log("Raw Quiz Data:", '{{ quiz | tojson | safe }}');
+
+// Parse the quiz data
+try {
+    window.quiz_details = JSON.parse('{{ quiz | tojson | safe }}');
+} catch (error) {
+    console.error("Error parsing quiz data:", error);
+}
+
+        // console.log(window.questions)
+    </script>
+    <script src="{{url_for('static', filename='js/quizAttempt.js')}}"></script>
+    <script>
+        score=JSON.parse(localStorage.getItem(score))
+        wrongCount= JSON.parse(localStorage.getItem(wrongCount))
+        correctCount= JSON.parse(localStorage.getItem(correctCount))
+    
+    </script>
+</body>
+</html>

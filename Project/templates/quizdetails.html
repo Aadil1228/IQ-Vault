@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{quiz.subject}}-{{quiz.title}}
+{% endblock title %}
+
+{% block cssfile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quizdetail.css') }}">
+{% endblock cssfile %}
+{% block body %}
+
+    <main>
+        <div id="quiz-details">
+            <img src="{{url_for('static', filename='images/'+quiz.thumbnail)}}" alt="Quiz Picture">
+            <div id="subject-topic-div">
+                <h1 id="subject"><span id="subject-name">{{quiz.subject}}</span> :</h1>
+                <h3 id="topic">{{quiz.title}}</h3>
+                <div id="progress-outside">
+                    <div id="progress-inside" data-score="{{(subjectScore.score if subjectScore.score else 0)/(subjectScore.maxMarks if subjectScore.maxMarks else 1)}}">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="topics-instructions-container">
+            <div id="topics-container">
+                <h3>Topics Covered</h3>
+                <div id="topics">
+                    {% for topic in topics %}
+                        <div class="topic"> • {{topic}}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="instructions-container">
+                <div id="instructions-container-button-control">
+                    <div>
+                        <button class="instructions-container-buttons">Overview</button>
+                        <button class="instructions-container-buttons">Instructions</button>
+                    </div>
+                    {% if quiz.user_id %}
+                        <button id="start-quiz" onclick="window.location.href=`{{url_for('userQuizAttempt', quiz_id=quiz.id)}}`">Start Quiz</button>
+                        {% else %}
+                        <button id="start-quiz" onclick="window.location.href=`{{url_for('quizAttempt', quiz_id=quiz.id)}}`">Start Quiz</button>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let themeBlue=localStorage.getItem('theme-blue')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        let anchorHoverOpacity=localStorage.getItem('anchor-hover-opacity')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--theme-blue', themeBlue);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+        document.documentElement.style.setProperty('--anchor-hover-opacity', anchorHoverOpacity);
+
+        
+    </script>
+    
+{% endblock body %}
+{% block jsfile %}
+    <!-- <script src="index.js"></script> -->
+     <script>
+        let progress=document.getElementById("progress-inside").dataset.score
+        let progressBar=document.getElementById("progress-inside")
+        progressBar.style.width=progress*100+"%"
+     </script>
+{% endblock jsfile %}

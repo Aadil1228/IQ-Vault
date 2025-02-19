@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home Page
+{% endblock title %}
+{% block cssfile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock cssfile %}
+{% block body %}
+    <div id="main">
+        <div id="featured-quizes-container">
+            <h2>Featured Quizes</h2>
+            <div id="arrow-keys-div">
+                <div id="arrow-left" class="arrow-keys"><i class="fa-solid fa-circle-arrow-left"></i></div>
+                <div id="arrow-right" class="arrow-keys"><i class="fa-solid fa-circle-arrow-right"></i></div>
+            </div>
+            <div id="card-holder">
+                {% if quizes %}
+                    {% for quiz in quizes %}
+                        <div class="quiz-card"><img src="{{url_for('static', filename='images/'+quiz.thumbnail)}}" alt="{{quiz.title}}" onclick="window.location.href=`{{url_for('quizDetails', quiz_id=quiz.id)}}`"> <div class="quiz-card-text"><p><span class="subject">{{quiz.subject}}</span> : <span class="topic">{{quiz.title}}</span></p></div></div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No Quizes Available</p>
+                {% endif %}
+
+                
+                <!-- <div class="quiz-card"><img src="{{url_for('static', filename='images/intro-ai.jpg')}} "> <div class="quiz-card-text"><p><span class="subject">Intro AI</span> : <span class="topic">Knowledge Base and Inference System</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/python.jpg')}}"><div class="quiz-card-text"><p><span class="subject">Python</span> : <span class="topic">Introduction to Loops</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/python.jpg')}}"> <div class="quiz-card-text"><p><span class="subject">Python</span> : <span class="topic">Iterative DataTypes</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/css.jpg')}}"> <div class="quiz-card-text"><p><span class="subject">CSS</span> : <span class="topic">Designing</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/java.jpg')}}"><div class="quiz-card-text"><p><span class="subject">Java</span>  : <span class="topic">Introduction</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/c++.jpg')}}"> <div class="quiz-card-text"><p><span class="subject">C++</span> : <span class="topic">Classes and Objects</span></p></div></div>
+                <div class="quiz-card"><img src="{{url_for('static', filename='images/SQL.jpg')}}"> <div class="quiz-card-text"><p><span class="subject">SQL</span> : <span class="topic">Introduction</span></p></div></div> -->
+            </div>
+        </div>
+        <div id="multiplayer">
+            <h2>Games</h2>
+            <div id="multiplayer-container">
+                <div id="multiplayer-profile">
+                    <span><img src="../images/hacker-profile.jpg" alt="profile"></span>
+                    <p id="multiplayer-username">Code Assembler</p>
+                </div>
+                <div id="card-holder">
+                    <div class="multiplayer-quiz-card" onclick="window.location.href='../flexbox_froggy/froggy_embed.html'"><span class="akar-icons--css-fill"></span> Flexbox Froggy</div>
+                    <div class="multiplayer-quiz-card"><span class="vscode-icons--file-type-htmlvalidate"></span> Front-End Frenzy</div>
+                    <div class="multiplayer-quiz-card"><span class="akar-icons--css-fill"></span>Cascading Creators</div>
+                    <div class="multiplayer-quiz-card"><span class="skill-icons--javascript"></span> JS Jugglers</div>
+                    <div class="multiplayer-quiz-card"><span class="skill-icons--java-dark"></span> Java Jammers</div>
+                    <div class="multiplayer-quiz-card"><span class="simple-icons--mysql"></span> SQL Sages</div>
+                </div>
+            </div>
+        </div>
+        <div id="subjects">
+            <h2>Subjects</h2>
+            <div id="card-holder">
+                <div class="quiz-card" onclick="window.location.href=`{{url_for('subject_page', subject='IntroAI')}}`"><img src="../static/images/intro-ai.jpg"> <div class="quiz-card-text"><p><span class="subject">Intro AI</span></p></div></div>
+                <div class="quiz-card" onclick="window.location.href=`{{url_for('subject_page', subject='C++')}}`"><img src="../static/images/c++.jpg"> <div class="quiz-card-text"><p><span class="subject">C++</span></p></div></div>
+                <div class="quiz-card"><img src="../static/images/dsa.png"> <div class="quiz-card-text"><p><span class="subject">Data Structures and Algorithms</span></p></div></div>
+                <div class="quiz-card" onclick="window.location.href=`{{url_for('subject_page', subject='Java')}}`"><img src="../static/images/java.jpg"> <div class="quiz-card-text"><p><span class="subject">Java</span></p></div></div>
+                <div class="quiz-card" onclick="window.location.href=`{{url_for('subject_page', subject='JavaScript')}}`"><img src="../static/images/js.jpg"> <div class="quiz-card-text"><p><span class="subject">JavaScript</span></p></div></div>
+                <div class="quiz-card" onclick="window.location.href=`{{url_for('subject_page', subject='Python')}}`"><img src="../static/images/python.jpg"> <div class="quiz-card-text"><p><span class="subject">Python</span></p></div></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let themeBlue=localStorage.getItem('theme-blue')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        let anchorHoverOpacity=localStorage.getItem('anchor-hover-opacity')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--theme-blue', themeBlue);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+        document.documentElement.style.setProperty('--anchor-hover-opacity', anchorHoverOpacity);
+        if (localStorage.getItem('theme-purple') === '#000') {
+            document.documentElement.style.setProperty('--heading-color', '#fff');
+        }
+    </script>
+{% endblock body %}
+    
+{% block jsfile %}
+    <script src="home.js"></script>
+{% endblock jsfile %}   

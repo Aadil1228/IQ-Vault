@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="/quizInput" method="POST" style="position: absolute; top: 100px; left: 100px;">
+    <div class="mb-3">
+      <label class="form-label">Subject</label>
+      <input type="text" class="form-control" id="subject" aria-describedby="emailHelp" name="subject">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="quizName">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Max Marks</label>
+        <input type="number" class="form-control" id="maxmarks" aria-describedby="emailHelp" name="MaxMarks">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Topics</label>
+      <div class="container">
+        <input type="text" class="form-control" name="topics[]">
+      </div>
+      <button onclick="addTopic()">Add Topic</button>
+      
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <script>
+    function addTopic() {
+      container=document.getElementById("container")
+      topicInput=document.createElement('input');
+      topicInput.type="text";
+      topicInput.name="topics[]";
+      topicInput.class="form-control";
+      topicInput.placeholder="Enter topic";
+      container.appendChild(topicInput);
+    }
+  </script>
+{% endblock  %}

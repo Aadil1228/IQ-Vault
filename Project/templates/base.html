@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        
+    {% endblock title %}</title>
+    <script src="https://kit.fontawesome.com/417a2259b3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    {% block cssfile %}
+        
+    {% endblock cssfile %}
+</head>
+<body>
+    <div id="header">
+        <h1 id="logo">QuizziFY</h1>
+        <div id="header-end">
+            <div id="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <i class="fa-solid fa-bell" id="notif"></i>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div id="sidebar-1st" class="sidebar-divs">
+            <a href="{{url_for('index')}}" class="{% if activePage=='index' %} active {% endif %}"><i class="ri-information-line icons"></i> Home</a>
+            <a href="{{url_for('about')}}" class="{% if activePage=='about' %} active {% endif %}"><i class="ri-information-line icons"></i> About</a>
+            <a href="{{url_for('achievements')}}"><i class="ri-award-fill icons"></i> Achievements</a>
+        </div>
+        <div id="sidebar-2nd" class="sidebar-divs">
+            <a href="{{url_for('myQuizes')}}" class="{% if activePage=='myQuizes' %} active {% endif %}"><i class="ri-information-line icons"></i> My Quizes</a>
+        </div>
+        <div id="siderbar-3rd" class="sidebar-divs">
+            <a href="{{url_for('settings')}}" class="{% if activePage=='settings' %} active {% endif %}"><i class="fas fa-cog icons"></i> Settings</a>
+        </div>
+        <div id="profile-div">
+            <div id="username"><span id="profile-img"><img src="../static/images/hacker-profile.jpg"></span><p id="profile-username">{{user.username}}</p></div>
+            <button id="logout-btn" onclick="location.href=`{{url_for('logout')}}`">Logout</button>
+        </div>
+    </div>
+    {% block body %}
+        
+    {% endblock body %}
+    {% block jsfile %}
+        
+    {% endblock jsfile %}
+    <script>
+        let themePurple=localStorage.getItem('theme-purple')
+        let themeBlue=localStorage.getItem('theme-blue')
+        let bodyGradient=localStorage.getItem('body-gradient')
+        let anchorHoverOpacity=localStorage.getItem('anchor-hover-opacity')
+        document.documentElement.style.setProperty('--theme-purple', themePurple);
+        document.documentElement.style.setProperty('--theme-blue', themeBlue);
+        document.documentElement.style.setProperty('--body-gradient', bodyGradient);
+        document.documentElement.style.setProperty('--anchor-hover-opacity', anchorHoverOpacity);
+        if (localStorage.getItem('theme-purple') === '#000') {
+            document.documentElement.style.setProperty('--heading-color', '#fff');
+        }
+    </script>
+</body>
+</html>

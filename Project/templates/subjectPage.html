@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block cssfile %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/subjectPage.css') }}">
+{% endblock cssfile %}
+{% block body %}
+    <div id="main">
+        <div id="subject-div" class="subject right visibleRight">
+            <h1 class="subject-name">{{ subject }}</h1>
+            <h5>Badges</h5>
+            <div id="badge-div">
+                {% for badge in badges %}
+                    <span class="badge">{{ badge }}</span>
+                {% endfor %}
+            </div>
+            <div id="progress-circle">
+                <div id="outer">
+                    <div id="inner">
+                        <div class="number">
+                            {{ ((subjectScore.score or 0) / (1 if (subjectScore.maxMarks==0 or not subjectScore.maxMarks) else subjectScore.maxMarks ) * 100) | round(1) }}%
+                        </div>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                    <defs>
+                        <linearGradient id="GradientColor">
+                            <stop offset="0%" stop-color="#e91e63"/>
+                            <stop offset="100%" stop-color="#673ab7"/>
+                        </linearGradient>
+                    </defs>
+                    {% set score = subjectScore.score if subjectScore else 0 %}
+                    {% set max_marks = subjectScore.maxMarks if (subjectScore and subjectScore.maxMarks!=0) else 1 %}
+                    {% set progress = 565 - (565 * score / max_marks) %}
+                    <circle cx="80" cy="80" r="70" stroke-linecap="round" stroke-dashoffset="{{ progress }}" 
+                            style="animation: animPython 2s linear forwards;" stroke="url(#GradientColor)" 
+                            stroke-width="15" fill="none"/>
+                </svg>
+            </div>
+        </div>
+        <div id="featured-quizes-container">
+            <h2>Recommended Quizzes</h2>
+            <div id="card-holder">
+                {% for quiz in quizes %}
+                    <div class="quiz-card" onclick="window.location.href=`{{url_for('quizDetails',quiz_id=quiz.id)}}`">
+                        <img src="{{ url_for('static', filename='images/' + quiz.thumbnail) }}" alt="Quiz Thumbnail">
+                        <div class="quiz-card-text">
+                            <p><span class="subject">{{ quiz.subject }}</span> : <span class="topic">{{ quiz.title }}</span></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}
